@@ -6,7 +6,7 @@ import os
 sdk = mercadopago.SDK(os.getenv("MP_ACCESS_TOKEN"))
 def criar_pix(produto, email_client, request):
 
-    base_url = "https://7e10f1b6eb88.ngrok-free.app"  # seu ngrok
+    base_url = "https://3kgames-store.up.railway.app"  # seu ngrok
     success_url = f"{base_url}/?status=approved&external_reference={produto.id}&payer_email={email_client}"
     failure_url = f"{base_url}/?status=failure"
     pending_url = f"{base_url}/?status=pending&external_reference={produto.id}&payer_email={email_client}"
