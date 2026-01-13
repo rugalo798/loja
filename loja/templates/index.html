@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>3K Games Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+<header class="bg-gray-900 text-white p-4">
+    <h1 class="text-2xl font-bold">3K Games Store</h1>
+</header>
+
+{% if message %}
+<div class="max-w-xl mx-auto mt-4 p-4 rounded-lg text-green-800 bg-green-100 border border-green-300 shadow-md flex items-center space-x-3">
+    <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+    </svg>
+    <span class="font-medium">{{ message }}</span>
+</div>
+{% endif %}
+
+<main class="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {% for produto in produtos %}
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition transform">
+        <img src="{{ produto.imagem_url }}" class="w-full h-48 object-cover">
+        <div class="p-4">
+            <h2 class="font-bold text-lg">{{ produto.nome }}</h2>
+            <p class="text-gray-700 mt-2">{{ produto.descricao|truncatechars:200 }}</p>
+            <p class="text-green-600 font-semibold mt-2">R$ {{ produto.preco }}</p>
+            <form action="{% url 'comprar' %}" method="POST" class="mt-4">
+                {% csrf_token %}
+                <input type="hidden" name="produto_id" value="{{ produto.id }}" />
+                <input type="email" name="email" placeholder="Seu email" required class="border p-2 w-full rounded">
+                <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Comprar com PIX(MERCADO PAGO)</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+</body>
+</html>
