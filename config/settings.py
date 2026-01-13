@@ -130,5 +130,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CSRF_TRUSTED_ORIGINS = [
     "https://7e10f1b6eb88.ngrok-free.app",  # substitua pelo seu ngrok
-    "https://loja-production-f44c.up.railway.app"
+    "https://loja-production-f44c.up.railway.app",
+    "*"
 ]
